@@ -1,0 +1,16 @@
+{
+	users:{
+		user:{
+    		"name": "cent",
+    		"password": "Password1"
+    	},
+    	root:{
+    		"name": "root",
+    		"password": "Password1"
+    	},
+    	vagrant:{
+    		"name": "vagrant",
+    		"password": "vagrant"
+    	}
+	}
+}
