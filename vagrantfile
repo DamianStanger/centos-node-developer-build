@@ -1,0 +1,28 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "puppetlabs/centos-7.2-64-puppet"
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
+    vb.customize ["modifyvm", :id, "--draganddrop", "bidirectional"]
+    vb.memory = 4096
+    vb.cpus = 1
+
+    vb.gui = true
+    vb.customize ["modifyvm", :id, "--ioapic", "on" ]
+    vb.customize ["modifyvm", :id, "--vram", "32"]
+    vb.customize ["modifyvm", :id, "--monitorcount", 1]
+    vb.customize ["modifyvm", :id, "--accelerate2dvideo", "off"]
+    vb.customize ["modifyvm", :id, "--accelerate3d", "off"]
+  end
+
+  config.vm.provision "chpasswd", type: "shell", privileged: true, inline: "echo 'vagrant:1234qwer' | chpasswd "
+  config.vm.provision "install-git", type: "shell", privileged: true, inline: "yum install git --quiet --assumeyes"
+  config.vm.provision "git-clone", type: "shell", privileged: true, inline: "mkdir -p ~/Code;cd ~/Code;rm -rf development-build;git clone http://damianstanger@github.com/damianstanger/development-build.git"
+  config.vm.provision "vagrant-up.sh", type: "shell", privileged: true, inline: "cd ~/Code/development-build;./vagrant-up.sh"
+end
+
+

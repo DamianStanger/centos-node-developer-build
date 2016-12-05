@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+echo "***** Running basic-packages *****"
+
+echo '** Installing vim **'
+sudo yum install vim -y
+
+echo "*** Install gedit ***"
+yum install gedit -y    
+
+echo '** Installing git **'
+sudo yum install git -y
+
+echo '** Installing curl **'
+sudo yum install curl -y
+
+echo "*** Install archive support ***"
+yum install unzip p7zip unrar bzip2 gzip lzma -y
+    
+echo "***** Fin! basic-packages *****"
