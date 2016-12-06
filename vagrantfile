@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "chpasswd", type: "shell", privileged: true, inline: "echo 'vagrant:1234qwer' | chpasswd "
   config.vm.provision "install-git", type: "shell", privileged: true, inline: "yum install git --quiet --assumeyes"
-  config.vm.provision "git-clone", type: "shell", privileged: true, inline: "mkdir -p ~/Code;cd ~/Code;rm -rf development-build;git clone http://damianstanger@github.com/damianstanger/development-build.git"
+  config.vm.provision "git-clone", type: "shell", privileged: true, inline: "mkdir -p ~/Code;cd ~/Code;rm -rf development-build;git clone https://github.com/DamianStanger/centos-node-developer-build.git"
   config.vm.provision "vagrant-up.sh", type: "shell", privileged: true, inline: "cd ~/Code/development-build;./vagrant-up.sh"
 end
 
