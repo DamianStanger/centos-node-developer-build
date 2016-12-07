@@ -2,13 +2,14 @@
 
 echo "***** Running terminals *****"
 
+user_name=$1
+
 function installZsh {
 
     echo '*** Installing ZSH ***'
-    sudo yum install -y zsh
-    sudo chsh -s /bin/zsh vagrant
-    sudo chsh -s /bin/zsh cent
-    sudo chsh -s /bin/zsh root
+    yum install -y zsh
+    chsh -s /bin/zsh
+    chsh -s /bin/zsh $user_name
     # [ -f ~/.bashrc ] || rm ~/.bashrc
 
     echo "*** Install OhMyZsh ***"
@@ -32,11 +33,15 @@ function installZsh {
 #
 #    # Setup repos folder
 #    source ~/.zshrc_custom
+
 }
 
 
 # Install Zsh and OhMyZsh
 installZsh
+export SHELL='/bin/zsh' # Do this so that the nvm install script modifies the .zshrc instead of .bashrc
+su - $user_name -c "export SHELL='/bin/zsh'"
+
 
 echo "*** install terminator ***"
 yum install -y terminator
