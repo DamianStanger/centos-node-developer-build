@@ -2,9 +2,9 @@ This is intended to be a script that you can run with the absolute bare minimal 
 
 Install Instructions
 1. Prerequisites on the host (im running windows 10)
-1a. Install VirtualBox (##URL##)
-1b. Install vagrant (##URL##)
-1c. Install git (##URL##)
+1a. Install VirtualBox - https://www.virtualbox.org/
+1b. Install vagrant - https://www.vagrantup.com/
+1c. Install git - https://git-scm.com/
 
 2. Clone this repo (git clone https://github.com/DamianStanger/centos-node-developer-build.git)
 

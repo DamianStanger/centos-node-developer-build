@@ -57,5 +57,3 @@ EOF
 }
 
 mongo --version &> /dev/null || installMongo
-
-
