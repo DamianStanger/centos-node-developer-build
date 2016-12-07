@@ -11,6 +11,9 @@ root_password =    config['users']['root']['password']
 vagrant_name =     config['users']['vagrant']['name']
 vagrant_password = config['users']['vagrant']['password']
 
+repo_name = config['repo']['name']
+repo_url =  config['repo']['url']
+
 Vagrant.configure("2") do |config|
 
   config.vm.box = "puppetlabs/centos-7.2-64-puppet"
@@ -31,9 +34,9 @@ Vagrant.configure("2") do |config|
 
 
   config.vm.provision "install-git", type: "shell", privileged: true, inline: "yum install git --quiet --assumeyes"
-  config.vm.provision "git-clone", type: "shell", privileged: true, inline: "mkdir -p ~/Code;cd ~/Code;rm -rf development-build;git clone https://github.com/DamianStanger/centos-node-developer-build.git"
-  config.vm.provision "users.sh", type: "shell", privileged: true, inline: "sh ~/Code/development-build/scripts/users.sh #{user_name} #{user_password} #{vagrant_name} #{vagrant_password} #{root_name} #{root_password}"
-  config.vm.provision "vagrant-up.sh", type: "shell", privileged: true, inline: "sh ~/Code/development-build/vagrant-up.sh #{user_name}"
+  config.vm.provision "git-clone", type: "shell", privileged: true, inline: "mkdir -p ~/Code;cd ~/Code;rm -rf #{repo_name};git clone #{repo_url}"
+  config.vm.provision "users.sh", type: "shell", privileged: true, inline: "sh ~/Code/#{repo_name}/scripts/users.sh #{user_name} #{user_password} #{vagrant_name} #{vagrant_password} #{root_name} #{root_password}"
+  config.vm.provision "vagrant-up.sh", type: "shell", privileged: true, inline: "cd ~/Code/#{repo_name};sh ./vagrant-up.sh #{user_name}"
 end
 
 
