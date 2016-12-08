@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo "***** Running mongo *****"
+
 function installMongo {
     echo Installing MongoDB
     # This script relies on the mongodb-org-2.6.repo file already existing
@@ -57,3 +59,5 @@ EOF
 }
 
 mongo --version &> /dev/null || installMongo
+
+echo "***** Fin! mongo *****"

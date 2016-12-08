@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
+echo "***** Running sublime text 3 *****"
+
 #cd /opt
 
-echo "sublime text 3 > installing"
 curl -O -L http://git.io/sublimetext
 sh sublimetext
 
-echo "sublime text 3 > cleanup"
 rm sublimetext
 
-echo "sublime text 3 > end"
+echo "***** Fin! sublime text 3 *****"

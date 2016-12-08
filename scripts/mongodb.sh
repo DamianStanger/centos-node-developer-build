@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
+echo "***** Running mongodb *****"
 version=2.6.12
 
-echo "mongodb > setting up repo definition file"
 cat<<EOF > /etc/yum.repos.d/mongodb.repo
 [mongodb]
 name=MongoDB Repository
@@ -11,10 +11,9 @@ gpgcheck=0
 enabled=1
 EOF
 
-echo "mongodb > installing"
+echo "*** installing mongodb $version ***"
 yum install mongodb-org-$version -y
 
-echo "mongodb > starting service"
 service mongod start
 
-echo "mongodb > end"
+echo "***** Fin! mongodb *****"

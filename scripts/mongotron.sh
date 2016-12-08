@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 
+echo "***** Running mongotron *****"
 version=1.0.0-alpha.5
 
 #cd /opt
 
-echo "mongotron > installing"
+echo "*** installing mongotron $version ***"
+
 curl -O -L https://github.com/officert/mongotron/releases/download/$version/Mongotron-linux-x64.zip
 unzip Mongotron-linux-x64.zip
 rm Mongotron-linux-x64.zip
 
-echo "mongotron > creating menu item"
 cat<<EOF > /usr/share/applications/mongotron.desktop
 [Desktop Entry]
 Type=Application
@@ -22,4 +23,4 @@ Terminal=false
 Categories=Development;
 EOF
 
-echo "mongotron > end"
+echo "***** Fin! mongotron *****"
