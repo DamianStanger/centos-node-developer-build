@@ -17,8 +17,8 @@ then
     mkdir /stuff 
     mount /dev/sdb1 /stuff
     echo "/dev/sdb1  /stuff  ext3  defaults  0  0" >> /etc/fstab
-    mkdir /stuff/Code
-    mkdir /stuff/Data
+    mkdir /stuff/code
+    mkdir /stuff/data
     chmod 777 -R /stuff
 fi
 
