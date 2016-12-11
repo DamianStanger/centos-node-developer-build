@@ -2,17 +2,19 @@
 
 echo "***** Running robomongo *****"
 version="0.9.0-rc10"
-#cd /opt
+pushd /opt
 
-echo "*** installing robomongo $version ***"
-curl -O -L https://download.robomongo.org/$version/linux/robomongo-$version-linux-x86_64-33c89ea.tar.gz
-tar xfz robomongo-$version-linux-x86_64-33c89ea.tar.gz
-rm robomongo-$version-linux-x86_64-33c89ea.tar.gz
-mv robomongo-$version-linux-x86_64-33c89ea/ /opt/robomongo
+if [ ! -f /opt/robomongo/bin/robomongo ]
+then
 
-curl -O -L https://robomongo.org/static/robomongo-64x64-4684f77d.png
-mv robomongo-64x64-4684f77d.png /usr/share/icons/robomongo.png
-rm robomongo-64x64-4684f77d.png
+    echo "*** installing robomongo $version ***"
+    curl -O -L https://download.robomongo.org/$version/linux/robomongo-$version-linux-x86_64-33c89ea.tar.gz
+    tar xfz robomongo-$version-linux-x86_64-33c89ea.tar.gz
+    rm robomongo-$version-linux-x86_64-33c89ea.tar.gz
+    mv robomongo-$version-linux-x86_64-33c89ea/ /opt/robomongo
+
+    curl -O -L https://robomongo.org/static/robomongo-64x64-4684f77d.png
+    mv robomongo-64x64-4684f77d.png /usr/share/icons/robomongo.png
 
 cat<<EOF > /usr/share/applications/robomongo.desktop
 [Desktop Entry]
@@ -27,5 +29,9 @@ Icon=/usr/share/icons/robomongo.png
 Terminal=false
 Categories=Development;
 EOF
+
+fi
+
+popd
 
 echo "***** Fin! robomongo *****"

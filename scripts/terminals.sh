@@ -9,15 +9,18 @@ function installZsh {
     echo '*** Installing ZSH ***'
     yum install -y zsh
     chsh -s /bin/zsh
-    chsh -s /bin/zsh $user_name
+    chsh -s /bin/zsh cent
     # [ -f ~/.bashrc ] || rm ~/.bashrc
 
     echo "*** Install OhMyZsh ***"
-    [ -d ~/.oh-my-zsh/ ] || \
-        ( sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" )
+    curl -LO https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh   
+    sh install.sh
+    rm install.sh
+    su - $user_name -c "curl -LO https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh ;sh install.sh;rm install.sh"   
 
     echo "*** Change the OhMyZsh theme ***"
-    sed -i -- 's/ZSH_THEME="robbyrussell"/ZSH_THEME="ys"/g' .zshrc
+    echo 'ZSH_THEME="ys"' >> .zshrc
+    su - $user_name -c "echo 'ZSH_THEME=\"ys\"' >> .zshrc"
 
 #   # Inject custom stuff into .zshrc
 #    cp /vagrant/files/.zshrc_custom ~/.zshrc_custom
@@ -45,6 +48,9 @@ su - $user_name -c "export SHELL='/bin/zsh'"
 
 echo "*** install terminator ***"
 yum install -y terminator
+
+echo "*** install figlet ***"
+yum install -y figlet
 
 
 echo "***** Fin terminals *****"

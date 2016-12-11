@@ -8,7 +8,7 @@ function installRuby {
     echo "*** Install Ruby ***"
     if ruby --version &> /dev/null
     then
-        echo Ruby already installed
+        echo "*** Ruby already installed ***"
         return;
     fi
     # Install RVM (Ruby the right way)
@@ -31,7 +31,7 @@ function installCompass {
     echo "*** Install Compass ***"
     if compass --version &> /dev/null
     then
-        echo Compass already installed
+        echo "*** Compass already installed ***"
         return;
     fi
 
@@ -45,7 +45,7 @@ function installScssLint {
     echo "*** Install ScssLint ***"
     if scss-lint --version &> /dev/null
     then
-        echo Compass already installed
+        echo "*** Compass already installed ***"
         return;
     fi
 
@@ -59,15 +59,9 @@ function installNode {
     echo "*** Install nvm $nvm_version and node $node_version for user $user_name ***"
 
     su - $user_name -c "curl -O -L https://raw.githubusercontent.com/creationix/nvm/v$nvm_version/install.sh"
-#    su - $user_name -c "sh install.sh"
-#    su - $user_name -c "rm install.sh"
-#    su - $user_name -c "source ~/.bashrc"
-#    su - $user_name -c "source ~/.zshrc"
 
     echo "*** Install node $node_version ***"
-     su - $user_name -c "sh install.sh;rm install.sh;source ~/.zshrc;nvm install $node_version;nvm use $node_version"
-#    su - $user_name -c "nvm install $node_version"
-#    su - $user_name -c "nvm use $node_version"
+    su - $user_name -c "sh install.sh;rm install.sh;source ~/.zshrc;nvm install $node_version;nvm use $node_version"
 
     echo "*** configure node ***"
     su - $user_name -c "cat<<EOF > ~/.npmrc

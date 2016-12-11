@@ -52,6 +52,9 @@ EOF
     sudo sed -i.bak -- 's/^bind_ip=127.0.0.1/# bind_ip=127.0.0.1/m' /etc/mongod.conf
     sudo cp /etc/yum.conf /etc/yum.conf.bak
 
+    echo "*** change the default data path to be in the home"
+    sed 's/dbpath=\/var\/lib\/mongo/dbpath=\/stuff\/Data/g' /etc/mongod.conf
+
     echo Starting MongoDB
     sudo service mongod start
 

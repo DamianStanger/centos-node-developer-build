@@ -14,6 +14,9 @@ yum clean all
 echo "*** makecache fast ***"
 yum makecache fast
 
+echo "*** epel-release ***"
+yum install epel-release -y
+
 echo "*** set timezone ***"
 timedatectl set-timezone Europe/London
 

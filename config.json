@@ -14,7 +14,10 @@
     	}
 	},
 	"repo":{
-	  "name": "centos-node-developer-build",
-    "url": "https://github.com/DamianStanger/centos-node-developer-build.git"
+	  	"name": "centos-node-developer-build",
+      	"url": "https://github.com/DamianStanger/centos-node-developer-build.git"
+	},
+	"virtualbox": {
+		"datadisk": "datadisk.vdi"
 	}
 }

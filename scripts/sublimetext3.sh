@@ -2,11 +2,15 @@
 
 echo "***** Running sublime text 3 *****"
 
-#cd /opt
+pushd /opt
 
-curl -O -L http://git.io/sublimetext
-sh sublimetext
+if [ ! -f /opt/sublime_text/sublime_text ]
+then
+    curl -O -L http://git.io/sublimetext
+    sh sublimetext
+    rm sublimetext
+fi
 
-rm sublimetext
+popd
 
 echo "***** Fin! sublime text 3 *****"
