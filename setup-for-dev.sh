@@ -28,7 +28,6 @@ sh ./scripts/developer-tools.sh
 sh ./scripts/atom.sh
 sh ./scripts/beyondcompare.sh
 sh ./scripts/mongo.sh
-sh ./scripts/mongodb.sh
 sh ./scripts/mongotron.sh
 sh ./scripts/robomongo.sh
 sh ./scripts/sublimetext3.sh

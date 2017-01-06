@@ -2,13 +2,12 @@
 
 echo "***** Running mongo *****"
 
+version=2.6.12
+
 function installMongo {
-    echo Installing MongoDB
-    # This script relies on the mongodb-org-2.6.repo file already existing
-    # if [ ! -f '/etc/yum.repos.d/mongodb-org-2.6.repo' ]
-    #     echo 'etc/yum.repos.d/mongodb-org-2.6.repo is required to install mongodb'
-    #     exit 1
-    # then
+    
+    echo "*** Installing MongoDB $version ***"
+
     if [ ! -f '/etc/yum.repos.d/mongodb-org-2.6.repo' ]
     then
         echo Creating /etc/yum.repos.d/mongodb-org-2.6.repo
@@ -23,27 +22,15 @@ EOF
         rm /tmp/mongodb-org-2.6.repo
     fi
 
-    # Comment out this
-        # This will install the latest in the 2.6 line
-        # If you go with this option then you will also want to remove the command
-        # from above that excludes updates for the latest packages.
-        # sudo yum install mongodb-org --quiet --assumeyes
+       
+    echo Installing mongo $version
+    sudo yum install mongodb-org-$version mongodb-org-server$version mongodb-org-shell-$version mongodb-org-mongos-$version mongodb-org-tools-$version --assumeyes
 
-    # Or this!
-        # This will install a specific mongo version (2.6.8)
-        mongo_version=2.6.8
-        echo Installing mongo $mongo_version
-        sudo yum install \
-            mongodb-org-$mongo_version \
-            mongodb-org-server$mongo_version \
-            mongodb-org-shell-$mongo_version \
-            mongodb-org-mongos-$mongo_version \
-            mongodb-org-tools-$mongo_version --quiet --assumeyes
-        # sudo yum install mongodb-org-shell-$mongo_version --quiet --assumeyes
-        # sudo yum install mongodb-org-mongos-$mongo_version --quiet --assumeyes
-        # sudo yum install mongodb-org-tools-$mongo_version --quiet --assumeyes
-        # sudo yum install mongodb-org-$mongo_version --quiet --assumeyes
-        # sudo yum install mongodb-org-server-$mongo_version --quiet --assumeyes
+    # sudo yum install mongodb-org-shell-$mongo_version --quiet --assumeyes
+    # sudo yum install mongodb-org-mongos-$mongo_version --quiet --assumeyes
+    # sudo yum install mongodb-org-tools-$mongo_version --quiet --assumeyes
+    # sudo yum install mongodb-org-$mongo_version --quiet --assumeyes
+    # sudo yum install mongodb-org-server-$mongo_version --quiet --assumeyes
 
     # Pin the version of mongo
     echo "exclude=mongodb-org,mongodb-org-server,mongodb-org-shell,mongodb-org-mongos,mongodb-org-tools" | sudo tee -a /etc/yum.conf &> /dev/null
@@ -52,13 +39,13 @@ EOF
     sudo sed -i.bak -- 's/^bind_ip=127.0.0.1/# bind_ip=127.0.0.1/m' /etc/mongod.conf
     sudo cp /etc/yum.conf /etc/yum.conf.bak
 
-    echo "*** change the default data path to be in the home"
+    echo "*** change the default data path to be in the home ***"
     sed 's/dbpath=\/var\/lib\/mongo/dbpath=\/stuff\/Data/g' /etc/mongod.conf
 
-    echo Starting MongoDB
+    echo "*** Starting MongoDB ***"
     sudo service mongod start
 
-    echo Finished installing MongoDB
+    echo "*** Finished installing MongoDB $version ***"
 }
 
 mongo --version &> /dev/null || installMongo
