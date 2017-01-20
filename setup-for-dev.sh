@@ -27,8 +27,10 @@ sh ./scripts/developer-languages.sh $user_name
 sh ./scripts/developer-tools.sh
 sh ./scripts/atom.sh
 sh ./scripts/beyondcompare.sh
+sh ./scripts/gitkraken.sh
 sh ./scripts/mongo.sh
 sh ./scripts/mongotron.sh
+sh ./scripts/postman.sh
 sh ./scripts/robomongo.sh
 sh ./scripts/sublimetext3.sh
 sh ./scripts/visualstudiocode.sh

@@ -45,8 +45,10 @@ NOTE: If a change is made to the vagrantfile you will need to 'git pull' on your
 
 
 ## Distributing to other devs
-To run the final resulting VM on a differennt machine it need not have vagrant installed, all that is needed is the .vbox and .vmdk files (mine are called development-build_default_1480950561529_78522.vbox and packer-centos-7.2-x86_64-virtualbox-vagrant-puppet-1457544893-disk1.vmdk which live inside the folder C:\VirtualBoxVMs\development-build_default_1480950561529_78522 but the default for virtual box is C:\Users\<<username>>\VirtualBox VMs). 
-Just double click the .vbox file and its running inside virtual box. NOTE: This wont be exactly the same as vagrant up (for example the vagrant shared folders will not be present)
+To run the final resulting VM on a different machine, it need not have vagrant installed, All that is needed is the .vbox and .vmdk files (mine are called development-build_default_1480950561529_78522.vbox and packer-centos-7.2-x86_64-virtualbox-vagrant-puppet-1457544893-disk1.vmdk which live inside the folder C:\VirtualBoxVMs\development-build_default_1480950561529_78522 but the default for virtual box is C:\Users\<<username>>\VirtualBox VMs). 
+Just double click the .vbox file and its running inside virtual box. NOTE: This wont be exactly the same as vagrant up (for example the vagrant shared folders will not be present). 
+
+I find that its best to do an export application from virtual box, this will create an archive file that is a 1/3 the size of the uncompressed files. it will also contain all the files needed to get the VM running on another devs machine.  
 
 
 ## Installing changes in the scripts on a deployed VM hosted in virtualbox rather than vagrant.
@@ -72,6 +74,4 @@ Where VBoxManage is installed in the virtualBox folder in 'program files' and by
 To utilise this space you need to open the VM with virtualbox and use the GParted tooling or fdisk to partition, format and mount a new volume. I find its best to do this after running vagrant up as everything is installed at that point. 
 
 ### (optional) Manual step add a second data disk
-We have had some problems with machines crashing and not coming back to life tus loosing the current work in progress. To mitigate this we are now mounting an extra data disk to the main VM. and mounting it in the home folder of the main new user as ~/Data
-
-Currently im using GParted as a manual step to format this then after logging in mount it by hand.
+We have had some problems with machines crashing and not coming back to life tus loosing the current work in progress. To mitigate this we are now mounting an extra data disk to the main VM. and mounting it in the root folder /stuff

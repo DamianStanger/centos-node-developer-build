@@ -21,13 +21,15 @@ Version=1.0
 Name=WebStorm
 Comment=IDE
 Path=/opt/$version/bin/
-Exec=sh webstorm.sh
+Exec=/bin/webstorm
 Icon=/opt/$version/bin/webstorm.svg
 Terminal=false
 Categories=Development;
 EOF
 
 fi
+
+ln -sf /opt/$version/bin/webstorm.sh /usr/bin/webstorm
 
 popd
 
