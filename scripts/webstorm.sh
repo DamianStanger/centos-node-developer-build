@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 echo "***** Running webstorm *****"
-version="WebStorm-2016.3.1"
+version="WebStorm-2016.3.3"
 pushd /opt
 
 if [ ! -f /usr/share/applications/webstorm.desktop ]

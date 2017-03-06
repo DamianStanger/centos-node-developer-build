@@ -2,35 +2,30 @@
 
 echo "***** Running mongo *****"
 
-version=2.6.12
+version=3.2.12
 
 function installMongo {
     
     echo "*** Installing MongoDB $version ***"
 
-    if [ ! -f '/etc/yum.repos.d/mongodb-org-2.6.repo' ]
+    if [ ! -f '/etc/yum.repos.d/mongodb-org-3.2.repo' ]
     then
-        echo Creating /etc/yum.repos.d/mongodb-org-2.6.repo
-        cat<<EOF > /tmp/mongodb-org-2.6.repo
-[mongodb-org-2.6]
-name=MongoDB 2.6 Repository
-baseurl=http://downloads-distro.mongodb.org/repo/redhat/os/x86_64/
-gpgcheck=0
+        echo Creating /etc/yum.repos.d/mongodb-org-3.2.repo
+        cat<<EOF > /tmp/mongodb-org-3.2.repo
+[mongodb-org-3.2]
+name=MongoDB Repository
+baseurl=https://repo.mongodb.org/yum/redhat/\$releasever/mongodb-org/3.2/x86_64/
+gpgcheck=1
 enabled=1
+gpgkey=https://www.mongodb.org/static/pgp/server-3.2.asc
 EOF
-        sudo cp /tmp/mongodb-org-2.6.repo /etc/yum.repos.d/mongodb-org-2.6.repo
-        rm /tmp/mongodb-org-2.6.repo
+        sudo cp /tmp/mongodb-org-3.2.repo /etc/yum.repos.d/mongodb-org-3.2.repo
+        rm /tmp/mongodb-org-3.2.repo
     fi
 
        
     echo Installing mongo $version
-    sudo yum install mongodb-org-$version mongodb-org-server$version mongodb-org-shell-$version mongodb-org-mongos-$version mongodb-org-tools-$version --assumeyes
-
-    # sudo yum install mongodb-org-shell-$mongo_version --quiet --assumeyes
-    # sudo yum install mongodb-org-mongos-$mongo_version --quiet --assumeyes
-    # sudo yum install mongodb-org-tools-$mongo_version --quiet --assumeyes
-    # sudo yum install mongodb-org-$mongo_version --quiet --assumeyes
-    # sudo yum install mongodb-org-server-$mongo_version --quiet --assumeyes
+    sudo yum install mongodb-org-$version mongodb-org-server-$version mongodb-org-shell-$version mongodb-org-mongos-$version mongodb-org-tools-$version --assumeyes
 
     # Pin the version of mongo
     echo "exclude=mongodb-org,mongodb-org-server,mongodb-org-shell,mongodb-org-mongos,mongodb-org-tools" | sudo tee -a /etc/yum.conf &> /dev/null

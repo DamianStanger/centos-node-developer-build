@@ -39,6 +39,40 @@ function installZsh {
 
 }
 
+function installTerminator {
+    echo "*** install terminator ***"
+    if [ ! -f /usr/bin/terminator ]
+    then
+        yum install -y terminator
+        su - $user_name -c 'mkdir -p ~/.config/terminator/'
+        su - $user_name -c 'cat<<EOF > ~/.config/terminator/config 
+[global_config]
+  suppress_multiple_term_dialog = True
+[keybindings]
+  line_down = <Primary>Down
+  line_up = <Primary>Up
+  next_tab = None
+  page_down = <Primary>Page_Down
+  page_up = <Primary>Page_Up
+  prev_tab = None
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    background_image = None
+    scrollback_lines = 99999
+EOF'
+    fi
+}
+
+
 
 # Install Zsh and OhMyZsh
 installZsh
@@ -46,8 +80,8 @@ export SHELL='/bin/zsh' # Do this so that the nvm install script modifies the .z
 su - $user_name -c "export SHELL='/bin/zsh'"
 
 
-echo "*** install terminator ***"
-yum install -y terminator
+installTerminator
+
 
 echo "*** install figlet ***"
 yum install -y figlet
